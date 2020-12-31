@@ -1,0 +1,50 @@
+@model Tuple<Compra, DetalleCompra>
+<div class="container">
+    <form asp-action="SetEncabezado" asp-controller="Compras" method="POST">
+        <div class="row">
+            <input type="hidden" asp-for="Item1.IdCompra">
+            <div class="form-group col-md-4">
+                <label># Factura</label>
+                <input type="text" class="form-control" asp-for="Item1.NumeroFactura">
+                <span asp-validation-for="Item1.NumeroFactura"></span>
+            </div>
+            <div class="form-group col-md-4">
+                <label>Proveedor</label>
+                <select for="IdProveedor" class="form-control" asp-items="@(new SelectList(ViewBag.Proveedores, "IdProveedor", "Nombre"))">
+                    <option>Seleccione</option>
+                </select>
+                <span asp-validation-for="Item1.Proveedor"></span>
+            </div>
+            <div class="form-group col-md-4">
+                <label>Fecha</label>
+                <input type="text" class="form-control" asp-for="Item1.Fecha">
+                <span asp-validation-for="Item1.Fecha"></span>
+            </div> 
+        </div>
+        <div class="row">
+            <button class="btn btn-primary" type="submit">GUARDAR</button>
+        </div>
+    </form>
+    <hr>
+    <form asp-action="SetDetalle" asp-controller="Compras">
+        <div class="row">
+            <div class="form-group col-md-4">
+                <label>Producto</label>
+                <select asp-for="Item2.IdProducto" class="form-control" asp-items="@(new SelectList(ViewBag.Productos, "IdProducto", "NombreProducto"))">
+                    <option>Seleccione</option>
+                </select>
+            </div>
+            <div class="form-group col-md-4">
+                <label>Cantidad</label>
+                <input type="text" class="form-control" asp-for="Item2.Cantidad">
+            </div>
+            <div class="form-group col-md-4">
+                <label>Precio</label>
+                <input type="text" class="form-control" asp-for="Item2.Precio">
+            </div>
+        </div>
+        <div class="row">
+            <button class="btn btn-primary" type="submit">GUARDAR</button>
+        </div>
+    </form>
+</div>

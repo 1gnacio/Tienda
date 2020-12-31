@@ -1,0 +1,31 @@
+@using Tienda.Models
+@using System.Globalization
+
+<div class="container">
+    <a class="btn btn-primary" asp-action="Nuevo" asp-controller="Compras">NUEVA COMPRA</a>
+    <table class="table table-bordered table-striped">
+        <thead>
+            <tr>
+                <th># Factura</th>
+                <th>Proveedor</th>
+                <th>Fecha de la compra</th>
+                <th>Total compra</th>
+                <th>Total IVA</th>
+                <th>Ver detalle</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (Compra c in ViewBag.Compras)
+            {
+                <tr>
+                    <td>@c.NumeroFactura</td>
+                    <td>@c.Proveedor.Nombre</td>
+                    <td>@c.Fecha.ToString("dd/MM/yyyy")</td>
+                    <td>$@Math.Round(c.DetalleCompras.Select(x=>(x.Cantidad * x.Precio)).DefaultIfEmpty(0).Sum(),2)</td>
+                    <td>$@Math.Round(c.DetalleCompras.Select(x=>x.Iva).DefaultIfEmpty(0).Sum(),2)</td>
+                    <td><a asp-action="Detalle" asp-controller="Compras" asp-route-itemid="@c.IdCompra">Ver</a></td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>

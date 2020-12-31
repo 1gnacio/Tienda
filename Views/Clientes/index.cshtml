@@ -1,0 +1,28 @@
+@model Cliente
+<partial name="~/Views/Clientes/_Formulario.cshtml"></partial>
+<table class="table table-bordered">
+    <thead>
+        <tr>
+            <td>ID</td>
+            <th>Nombre</th>
+            <th>DNI</th>
+            <th>CUIL</th>
+            <th>Correo</th>
+            <th colspan="2"></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (Cliente c in ViewBag.Clientes)
+        {
+            <tr>
+                <td>@c.IdCliente</td>
+                <td>@c.Nombre</td>
+                <td>@c.Dui</td>
+                <td>@c.Nit</td>
+                <td>@c.Correo</td>
+                <td><a asp-action="Modificar" asp-controller="Clientes" asp-route-id="@c.IdCliente">Editar</a></td>
+                <td><a asp-action="Eliminar" asp-controller="Clientes" asp-route-id="@c.IdCliente">Eliminar</a></td>
+            </tr>
+        }
+    </tbody>
+</table>
